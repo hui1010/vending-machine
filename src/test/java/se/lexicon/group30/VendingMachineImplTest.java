@@ -4,8 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class VendingMachineImplTest {
     VendingMachineImpl implTest = new VendingMachineImpl(new Product[0]);
@@ -21,10 +20,14 @@ public class VendingMachineImplTest {
     }
 
     @Test
-    public void return_true_if_three_product_are_successfully_added() {
-        assertTrue(implTest.addProducts(cola));
-        assertTrue(implTest.addProducts(chocolate));
-        assertTrue(implTest.addProducts(salad));
+    public void return_false_if_three_product_are_already_added() {
+        assertFalse(implTest.addProducts(cola));
+        assertFalse(implTest.addProducts(chocolate));
+        assertFalse(implTest.addProducts(salad));
+
+        //length should be 3
+        assertEquals(3, implTest.getProducts().length);
+
     }
 
     @Test

@@ -23,19 +23,53 @@ public class VendingMachineImpl implements VendingMachine {
     }
 
 
-    public boolean addProducts (Product toAdd){ //todo check if the product already exists
-        /*if (productExists(products, toAdd)){
+    public boolean addProducts (Product toAdd){
+        if (productExists(toAdd)){
             return false;
-        }*/
+        }
         products = add(products, toAdd);
         return true;
     }
 
-    /*private boolean productExists(Product[] source, Product toAdd) {
-        for (int i = 0; i < source.length; i++) {
+    private boolean productExists(Product toAdd) {
+        boolean exist = false;
+        if (toAdd instanceof Drinks) {
+            for (int i = 0; i < products.length; i++) {
+                if (toAdd.getName() == products[i].getName()
+                    && toAdd.getDescription() == products[i].getDescription()
+                    && ((Drinks) toAdd).getVolume() == ((Drinks)products[i]).getVolume()
+                    && ((Drinks) toAdd).isBubbles() == ((Drinks)products[i]).isBubbles()){
 
+                    exist = true;
+                }
+
+            }
+        } else if (toAdd instanceof Foods){
+            for (int i = 0; i < products.length; i++) {
+                if (toAdd.getName() == products[i].getName()
+                    && toAdd.getDescription() == products[i].getDescription()
+                    && ((Foods)toAdd).getWeight() == ((Foods)products[i]).getWeight()
+                    && ((Foods)toAdd).isMeat() == ((Foods)products[i]).isMeat()
+                    && ((Foods)toAdd).isNuts() == ((Foods)products[i]).isNuts()) {
+
+                    exist = true;
+                }
+            }
+        } else if (toAdd instanceof Snacks){
+            for (int i = 0; i < products.length; i++) {
+                if (toAdd.getName() == products[i].getName()
+                    && toAdd.getDescription() == products[i].getDescription()
+                    && ((Snacks)toAdd).getWeight() == ((Snacks)products[i]).getWeight()
+                    && ((Snacks)toAdd).getCalorie() == ((Snacks)products[i]).getCalorie()){
+
+                    exist = true;
+                }
+
+            }
         }
-    }*/
+
+        return exist;
+    }
 
     private Product[] add(Product[] source, Product toAdd) {
         Product[] added = Arrays.copyOf(source, source.length + 1);
